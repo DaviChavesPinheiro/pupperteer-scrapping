@@ -44,7 +44,7 @@ puppeteer.launch({
 }).then(async browser => {
     console.log('Running tests..')
     const page = await browser.newPage()
-    await page.goto('https://leitor.net/manga/one-piece/13')
+    await page.goto('https://manganelo.com/manga/read_naruto_manga_online_free3')
     await page.waitFor(5000)
     //   await page.screenshot({ path: 'testresult.png', fullPage: true })
     console.log(await page.content())
