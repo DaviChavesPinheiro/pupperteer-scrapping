@@ -44,10 +44,9 @@ puppeteer.launch({
 }).then(async browser => {
     console.log('Running tests..')
     const page = await browser.newPage()
-    await page.goto('https://mangayabu.com/manga/vagabond')
+    await page.goto('https://leitor.net/manga/one-piece/13')
     await page.waitFor(5000)
     //   await page.screenshot({ path: 'testresult.png', fullPage: true })
     console.log(await page.content())
     await browser.close()
-    console.log(`All done, check the screenshot. ✨`)
 })
