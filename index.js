@@ -4,10 +4,10 @@
 
 // (async () => {
 //     const browser = await puppeteer.launch({
-//         args: [
-//             '--no-sandbox',
-//             '--disable-setuid-sandbox',
-//         ],
+// args: [
+//     '--no-sandbox',
+//     '--disable-setuid-sandbox',
+// ],
 //         // headless: false
 //     });
 //     const page = await browser.newPage();
@@ -35,7 +35,13 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 // puppeteer usage as normal
-puppeteer.launch({ headless: true }).then(async browser => {
+puppeteer.launch({
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+    ],
+    headless: true
+}).then(async browser => {
     console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto('https://mangayabu.com/manga/vagabond')
