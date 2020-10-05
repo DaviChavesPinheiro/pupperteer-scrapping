@@ -11,14 +11,16 @@ const puppeteer = require('puppeteer');
         // headless: false
     });
     const page = await browser.newPage();
-    await page.goto('https://manganero.site/#/manga/642');
-    await page.waitFor('.sc-jrsJCI.sc-iqAbSa.dZkMxf.cYCoKy p')
+    await page.goto('https://mangayabu.com/manga/vagabond');
+    await page.waitFor('.manga-chapters')
 
     const chapters = await page.evaluate(() => {
-        const info = document.querySelector(".sc-jrsJCI.sc-iqAbSa.dZkMxf.cYCoKy p").textContent
-        // console.log(document.querySelector("pre"))
-        console.log(info)
-        return info
+        const chaptersElements = document.querySelectorAll(".single-chapter a")
+        const chapters = []
+        chaptersElements.forEach(chapterElement => {
+            chapters.push({title: chapterElement.textContent, url: chapterElement.href})
+        })
+        return chapters.reverse()
     });
 
     console.log('chapters:', chapters);
