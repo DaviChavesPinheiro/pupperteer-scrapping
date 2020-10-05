@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer');
             '--no-sandbox',
             '--disable-setuid-sandbox',
         ],
-        headless: false
+        // headless: false
     });
     const page = await browser.newPage();
     await page.goto('https://manganero.site/#/manga/642');
