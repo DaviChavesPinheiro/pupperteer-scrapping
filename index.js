@@ -8,18 +8,16 @@ const puppeteer = require('puppeteer');
             '--no-sandbox',
             '--disable-setuid-sandbox',
         ],
+        // headless: false
     });
     const page = await browser.newPage();
 
-    await page.goto('https://mangayabu.com/manga/vagabond');
+    await page.goto('https://charlotte-services.herokuapp.com/mangas');
 
     const chapters = await page.evaluate(() => {
-        const chaptersElements = document.querySelectorAll(".single-chapter a")
-        const chapters = []
-        chaptersElements.forEach(chapterElement => {
-            chapters.push({ title: chapterElement.textContent, url: chapterElement.href })
-        })
-        return chapters.reverse()
+        const info = document.querySelector("pre").textContent
+        // console.log(document.querySelector("pre"))
+        return info
     });
 
     console.log('chapters:', chapters);
