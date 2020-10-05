@@ -16,10 +16,10 @@
 //     console.log("start")
 //     // await page.waitFor('.manga-chapters h2')
 //     console.log(await page.content())
-//     // const chapters = await page.evaluate(() => {
+    // const chapters = await page.evaluate(() => {
 
-//     //     return document.querySelector(".manga-chapters h2").textContent
-//     // });
+    //     return document.querySelector(".manga-chapters h2").textContent
+    // });
 
 //     // console.log('chapters:', chapters);
 
@@ -46,7 +46,17 @@ puppeteer.launch({
     const page = await browser.newPage()
     await page.goto('https://manganelo.com/manga/read_naruto_manga_online_free3')
     await page.waitFor(5000)
-    //   await page.screenshot({ path: 'testresult.png', fullPage: true })
-    console.log(await page.content())
-    await browser.close()
+
+    const chapters = await page.evaluate(() => {
+        const chaptersElements = document.querySelectorAll("a.chapter-name.text-nowrap")
+        const chapters = []
+        chaptersElements.forEach(chapterElement => {
+            chapters.push({title: chapterElement.textContent, url: chapterElement.href})
+        })
+        return chapters.reverse()
+    });
+
+    console.log('chapters:', chapters);
+
+    await browser.close();
 })
